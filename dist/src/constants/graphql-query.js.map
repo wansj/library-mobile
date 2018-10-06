@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../src/constants/graphql-query.js"],"names":["gql","GetLogedUserQuery"],"mappings":";;;;AAAA,OAAOA,GAAP,MAAgB,aAAhB;;AAEA,OAAO,IAAMC,oBAAoBD,GAApB,iBAAN","file":"graphql-query.js","sourcesContent":["import gql from 'graphql-tag'\n\nexport const GetLogedUserQuery = gql`\n  query GetLogedUser{\n    logedUser{\n    \n    }\n  }\n`\n"]}
