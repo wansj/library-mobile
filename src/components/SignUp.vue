@@ -32,7 +32,7 @@
       <x-button type="primary" :disabled="!canSubmit" class="mt4" @click.native="signUp">注册</x-button>
     </div>
     <div v-transfer-dom>
-      <alert v-model="showErrAlert">{{errMsg}}</alert>
+      <alert v-model="showAlert">{{errMsg}}</alert>
     </div>
   </div>
 </template>
