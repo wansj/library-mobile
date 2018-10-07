@@ -116,6 +116,10 @@
           },
           result ({data}) {
             this.addToList([{iat: dateFormat(new Date(data.postAdded.iat), 'HH:mm'), posts: [data.postAdded]}], 'after')
+            this.$nextTick(() => {
+              const scrollParent = this.$refs.scrollParent
+              scrollParent.scrollTop = scrollParent.scrollHeight - scrollParent.offsetHeight
+            })
           }
         }
       },
