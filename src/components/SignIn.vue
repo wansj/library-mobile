@@ -1,15 +1,17 @@
 <template>
-  <div class="mh3 pt6 h-100 relative">
+  <div class="mh3 h-100 flex flex-column">
     <div v-transfer-dom>
       <loading :show="loadingStatus.loading" text=""></loading>
     </div>
-    <group label-width="60px">
-      <h1 slot="title" class="f2 lh-title normal">登录图书馆</h1>
-      <x-input title="帐号" v-model="username" placeholder="请填写账号" show-clear></x-input>
-      <x-input title="密码" type="password" v-model="password" placeholder="请填写密码" show-clear></x-input>
-    </group>
-    <x-button type="primary" :disabled="!canSubmit" class="mt4" @click.native="logIn">登录</x-button>
-    <div class="fixed bottom-1 w-100 tc">
+    <div class="flex-auto flex flex-column justify-center">
+      <group label-width="60px">
+        <h1 slot="title" class="f2 lh-title normal">登录图书馆</h1>
+        <x-input title="帐号" v-model="username" placeholder="请填写账号" @on-focus="userInputFocused=true" @on-blur="userInputFocused=false" show-clear></x-input>
+        <x-input title="密码" type="password" v-model="password" placeholder="请填写密码" @on-focus="passInputFocused=true" @on-blur="passInputFocused=false" show-clear></x-input>
+      </group>
+      <x-button type="primary" :disabled="!canSubmit" class="mt4" @click.native="logIn">登录</x-button>
+    </div>
+    <div class="w-100 tc mb3 flex-none" v-show="showBottomLink">
       <router-link tag="a" to="/reset-password" class="br b--silver pr3 pv1">找回密码</router-link>
       <router-link tag="a" to="/signup" class="pl2">注册帐号</router-link>
     </div>
@@ -38,12 +40,17 @@
         password: '',
         publicKey: '',
         showAlert: false,
-        loadingStatus: null
+        loadingStatus: null,
+        userInputFocused: false,
+        passInputFocused: false
       }
     },
     computed: {
       canSubmit () {
         return this.username && this.password
+      },
+      showBottomLink: function () {
+        return !this.userInputFocused && !this.passInputFocused
       }
     },
     components: {

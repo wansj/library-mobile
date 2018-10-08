@@ -3,7 +3,7 @@
     <p class="tc" v-if="$apollo.queries.readPlans.loading">
       <span class="v-mid f6 dib">加载中&nbsp;&nbsp;</span><inline-loading></inline-loading>
     </p>
-    <div v-else-if="readPlans && !editing" class="h-100 overflow-hidden">
+    <div v-else-if="readPlans && (readPlans.length > 0) && !editing" class="h-100 overflow-hidden">
       <div v-transfer-dom>
         <popup v-model="showRight" position="right">
           <div class="bg-white w5 pa3 h-100">
@@ -37,7 +37,7 @@
         </flow>
       </div>
     </div>
-    <div v-else-if="!readPlans || editing">
+    <div v-else-if="!readPlans || (readPlans.length === 0) || editing">
       <x-header title="我的读书计划">
         <a slot="right" class="header-btn"><x-button mini plain :disabled="!canSave" @click.native="save">保存</x-button></a>
       </x-header>
@@ -119,7 +119,7 @@
     computed: {
       startOfDate: {
         get: function () {
-          if (this.readPlans && this.setLastEndDateAsStart) {
+          if (this.readPlans && (this.readPlans.length > 0) && this.setLastEndDateAsStart) {
             const [lastReadPlan] = this.readPlans
             const lastPlan = lastReadPlan.plans[lastReadPlan.plans.length - 1]
             let lastDate = new Date(lastPlan.timespan[1])
