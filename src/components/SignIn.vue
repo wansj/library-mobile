@@ -1,7 +1,7 @@
 <template>
   <div class="mh3 h-100 flex flex-column">
     <div v-transfer-dom>
-      <loading :show="loadingStatus.loading" text=""></loading>
+      <loading :show="$apollo.queries.publicKey.loading" text=""></loading>
     </div>
     <div class="flex-auto flex flex-column justify-center">
       <group label-width="60px">
@@ -29,7 +29,6 @@
   import { encryptPassword } from '../utils'
   import { G_AUTH_TOKEN } from '../constants/settings'
   import { UpdateAuthPayloadMutation } from '../store/AuthPayload'
-  import { GetLoadingStatusQuery } from '../store/LoadingStatus'
   import client from '../ApolloClient'
 
   export default {
@@ -40,7 +39,6 @@
         password: '',
         publicKey: '',
         showAlert: false,
-        loadingStatus: null,
         userInputFocused: false,
         passInputFocused: false
       }
@@ -62,10 +60,11 @@
     },
     apollo: {
       publicKey: {
-        query: GetPublicKeyQuery
-      },
-      loadingStatus: {
-        query: GetLoadingStatusQuery
+        query: GetPublicKeyQuery,
+        error (error) {
+          console.log(error.message)
+          this.$vux.alert('获取公钥失败，无法对密码进行加密')
+        }
       }
     },
     methods: {
