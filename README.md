@@ -1,6 +1,8 @@
 # library-mobile
 
 > A library client for mobile browser
+## Demo
+[![Watch the video](https://pan.baidu.com/s/1y8mh8ihRT28QfzJbxVXXEQ)](https://pan.baidu.com/s/1H1hasKp5SWcD1b2izd38KQ)
 
 ## Build Setup
 
