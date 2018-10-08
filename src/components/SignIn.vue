@@ -63,7 +63,10 @@
         query: GetPublicKeyQuery,
         error (error) {
           console.log(error.message)
-          this.$vux.alert('获取公钥失败，无法对密码进行加密')
+          this.$vux.alert.show({
+            title: '出错了',
+            content: '获取公钥失败，无法对密码进行加密'
+          })
         }
       }
     },
